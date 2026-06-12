@@ -44,7 +44,7 @@ if (apiKey && baseUrl && slug) {
         {event.imageUrl ? (
           <img class="rounded-xl" src={event.imageUrl} alt="" loading="lazy" width="960" />
         ) : null}
-        <div class="rounded-xl border border-dashed border-neutral-300 py-16 text-center dark:border-neutral-700" data-kintana-widget="" data-event-id={event.id} />
+        <div class="rounded-xl border border-dashed border-neutral-300 py-16 text-center dark:border-neutral-700" data-kintana-widget={`event:${event.id}`} />
       </article>
     ) : (
       <p class="mt-16 text-neutral-600 dark:text-neutral-400">Nothing lives at this link yet.</p>

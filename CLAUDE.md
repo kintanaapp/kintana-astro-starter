@@ -12,6 +12,9 @@ Public env vars MUST use Astro’s `PUBLIC_` prefix (not `NEXT_PUBLIC_`). Anythi
 | --- | --- |
 | `/` | Server component lists via `await client.listEvents()` |
 | `/shows/[slug]` | Calls `await client.getEvent(Astro.params.slug)` |
-| `/request-a-show` | Mounts `<RequestShowIsland client:load />` so React-powered `<EmbedForm />` can authenticate |
+| `/gallery/` | `await client.getSiteGallery()` (or `getSiteManifest().gallery`) |
+| `/request-a-show` | Mounts `<RequestShowIsland client:load />` with `<EmbedForm kind="SHOW_REQUEST" />` (no form id env) |
 
-Whenever you scaffold new routes, reuse `createKintanaClient({ apiKey: import.meta.env.PUBLIC_KINTANA_API_KEY!, baseUrl: import.meta.env.PUBLIC_KINTANA_BASE_URL! })` from the `.astro` server context first; only hydrate React when hooks are unavoidable.
+`src/layouts/Base.astro` loads `getSiteManifest()` for the header logo when set in Kintana → Custom site → Site assets.
+
+Whenever you scaffold new routes, reuse `kintanaClient()` from `src/lib/kintana.ts` (site-bound `kpa_live_…` key required for gallery/manifest APIs).
